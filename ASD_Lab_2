@@ -1,0 +1,58 @@
+/*Задача 16.
+Дана разреженная матрица (CCS) и число b. Матрица просматривается слева на право,
+и сверху вниз. На места ненулевых элементов матрицы вначале поместить все её
+ненулевые элементы большие b, а затем ненулевые элементы меньшие b. Элементы не сортировать.*/
+
+import java.util.Scanner;
+
+public class ASD_Lab_2 {
+    public static void main(String[] args) {           // 0 1 2 3
+                                                     // 0|7 0 0 0
+        int[] A = {7, 3, 5, 6, 2, 9, 1};             // 1|3 6 0 0
+        int[] IA = {0, 1, 2, 1, 2, 2, 3};            // 2|5 0 2 9
+        int[] JA = {0, 3, 4, 5, 7};                  // 3|0 0 0 1
+
+        System.out.print("Исходный массив значений A: ");
+        for (int i = 0; i < A.length; i++) {
+            System.out.print(A[i] + " ");
+        }
+        System.out.println();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите целое число b: ");
+        int b = scanner.nextInt();
+
+        perestanovka(A, b);
+
+        System.out.print("Результирующий массив значений A: ");
+        for (int i = 0; i < A.length; i++) {
+            System.out.print(A[i] + " ");
+        }
+        System.out.println();
+
+        scanner.close();
+    }
+
+    public static void perestanovka(int[] A, int b) {
+        int[] res = new int[A.length];
+        int index = 0;
+
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] > b) {
+                res[index] = A[i];
+                index++;
+            }
+        }
+
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] <= b) {
+                res[index] = A[i];
+                index++;
+            }
+        }
+
+        for (int i = 0; i < A.length; i++) {
+            A[i] = res[i];
+        }
+    }
+}
